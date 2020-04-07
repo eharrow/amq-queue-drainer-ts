@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "es6",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "eslint.autoFixOnSave":  true,
+  "eslint.validate":  [
+    "javascript",
+    {"language":  "typescript",  "autoFix":  true  },
+  ]
+}
