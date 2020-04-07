@@ -23,7 +23,7 @@ Options:
   -v, --vhost [vhost]        virtual host [/] (default: "")
   -u, --user [user]          rabbit user
   -c, --password [password]  rabbit password
-  -q, --queue [queue]        queue name e.g. accepted, settlement_executed or payment_processed
+  -q, --queue [queue]        queue name e.g. queue1
   -l, --log-message          log the dequeued message
   -n, --num-to-consume       number of messages to consume [default all]
   -h, --help                 output usage information

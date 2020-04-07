@@ -5,9 +5,9 @@ import { Drainer } from './drainer';
 import pkg from '../package.json';
 
 // example queue names
-const ACCEPTED_Q = 'accepted';
-const SETTLEMENT_EXEC_Q = 'settlement_executed';
-const PROCESSED_Q = 'payment_processed';
+const QUEUE_1 = 'queue_1';
+const QUEUE_2 = 'queue_2';
+const QUEUE_3 = 'queue_3';
 
 const fonts = figlet.fontsSync();
 const font = fonts[Math.floor(Math.random() * fonts.length)];
@@ -22,7 +22,7 @@ program
     .option('-c, --password <password>', 'rabbit password')
     .option(
         '-q, --queue <queue>',
-        `queue name e.g. ${ACCEPTED_Q}, ${SETTLEMENT_EXEC_Q} or ${PROCESSED_Q}`, 'test_q'
+        `queue name e.g. ${QUEUE_1}, ${QUEUE_2} or ${QUEUE_3}`, 'test_q'
     )
     .option('-l, --log-message', 'log the dequeued message.  This will be ignored if used with --log-message-csv')
     .option('--log-message-csv', 'log the dequeued message as CSV')

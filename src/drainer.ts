@@ -46,20 +46,8 @@ export class Drainer {
 
         return connection;
     }
-    private async setup(processFn: Function) {
+    private async setupAndProcess(processFn: Function) {
         try {
-            // const connection = await amqplib.connect(this.url);
-
-            // connection.on('error', (err: Error) => {
-            //     if (err.message !== "Connection closing") {
-            //         console.error("[AMQP] conn error", err.message);
-            //     }
-            // });
-
-            // connection.on('close', (err: Error) => {
-            //     console.error("[AMQP] conn closed.  Will reconnect...", err.message);
-
-            // });
             const connection = await this.createConnection(this.url);
 
             const channel = await connection.createChannel();
@@ -109,7 +97,7 @@ export class Drainer {
      * connect and consume messages
      */
     public async consumeMessages() {
-        return this.setup(
+        return this.setupAndProcess(
             (channel: amqplib.Channel, logMessageCsv: boolean, logMessage: boolean) => {
                 let count = 0;
 
@@ -135,7 +123,7 @@ export class Drainer {
      * connect and consume a specific number of messages
      */
     public async consumeNmessages(numToConsume: number) {
-        return this.setup(
+        return this.setupAndProcess(
             (channel: amqplib.Channel, logMessageCsv: boolean, logMessage: boolean) => {
                 let count = 0;
                 const consumers = [];
