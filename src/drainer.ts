@@ -3,8 +3,8 @@ import { Spinner } from 'cli-spinner';
 import chalk from 'chalk';
 import emoji from 'node-emoji';
 import { Message } from 'amqplib';
+import i18n from 'i18n';
 
-const spinner: Spinner = new Spinner('waiting.. %s ');
 
 /**
  * The queue drainer that connects to an AMQ queue and consumes all the messages.
@@ -14,6 +14,10 @@ export class Drainer {
     private queue: string;
     private logMessage: boolean;
     private logMessageCsv: boolean;
+    private i18n: any;
+    private spinner: Spinner;
+
+
 
     /**
      *
@@ -21,15 +25,17 @@ export class Drainer {
      * @param {string} queue
      * @param {boolean} logMessage
      */
-    public constructor(url: string, queue: string, logMessage: boolean, logMessageCsv: boolean) {
+    public constructor(url: string, queue: string, logMessage: boolean, logMessageCsv: boolean, i18n:  any) {
         this.url = url;
         this.queue = queue;
         this.logMessage = logMessage;
         this.logMessageCsv = logMessageCsv;
+        this.i18n = i18n;
+        this.spinner = new Spinner('waiting.. %s ');
     }
 
     private async createConnection(url: string) {
-        console.log(`connecting to... ${chalk.blue(url)}`);
+        console.log(`${this.i18n.__('connect.msg')} ${chalk.blue(url)}`);
 
         const connection = await amqplib.connect(url);
 
@@ -61,17 +67,17 @@ export class Drainer {
                             this.queue,
                         )}. ${chalk.inverse.greenBright('CTRL+C')} to exit`,
                     );
-                    spinner.start();
+                    this.spinner.start();
                     const logMessage = this.logMessage;
                     const logMessageCsv = this.logMessageCsv;
 
                     return processFn(channel, logMessageCsv, logMessage);
                 }
             } catch (err) {
-                console.error('Error when connecting to the queue', err);
+                console.error(`${this.i18n.__('connect.error.msg.queue')}`, err);
             }
         } catch (error) {
-            console.error('Error connecting to server', error.message);
+            console.error(`${this.i18n.__('connect.error.msg.server')}`, error.message);
         }
     }
 
@@ -82,7 +88,7 @@ export class Drainer {
                 console.debug(
                     '----8<---------8<---------8<--------8<---------8<--------8<----------',
                 );
-                console.debug(`"Message #","Message Body"`);
+                console.debug(`${this.i18n.__('log.csv.header')}`);
             }
             console.debug(`${count},"${message.content.toString()}"`);
         } else {
@@ -103,12 +109,12 @@ export class Drainer {
 
                 return channel
                     .consume(this.queue, (message: Message) => {
-                        spinner.stop(true);
+                        this.spinner.stop(true);
 
                         if (message != null) {
                             count++;
                             this.log(count, message, logMessage, logMessageCsv);
-                            spinner.start();
+                            this.spinner.start();
                             return channel.ack(message);
                         }
                     })
@@ -133,7 +139,7 @@ export class Drainer {
                 }
                 return Promise.all(consumers)
                     .then((messages) => {
-                        spinner.stop(true);
+                        this.spinner.stop(true);
 
                         messages.forEach((message) => {
                             if (message) {

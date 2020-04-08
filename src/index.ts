@@ -3,6 +3,12 @@ import figlet from 'figlet';
 import program from 'commander';
 import { Drainer } from './drainer';
 import pkg from '../package.json';
+import i18n from 'i18n';
+
+i18n.configure({
+    directory: __dirname + '/locales',
+    objectNotation: true
+});
 
 // example queue names
 const QUEUE_1 = 'queue_1';
@@ -16,7 +22,7 @@ console.log(chalk.yellow(figlet.textSync('Q Drainer', { font, horizontalLayout: 
 program
     .version(pkg.version)
     .option('-h, --host <host>', 'rabbit host', 'localhost')
-    .option('-p, --port <port>', 'rabbit port', 5672)
+    .option('-p, --port <port>', 'rabbit port', '5672')
     .option('-v, --vhost <vhost>', 'virtual host', '')
     .option('-u, --user <user>', 'rabbit user')
     .option('-c, --password <password>', 'rabbit password')
@@ -40,7 +46,7 @@ const logMessageCsv: boolean = program.logMessageCsv;
 const numToConsume: number = program.numToConsume || 0;
 
 if (!(host && port && queue)) {
-    console.error('one or more missing arguments');
+    console.error(i18n.__('err_missingArgs'));
     console.error(program.help());
     process.exit(1);
 }
@@ -53,7 +59,7 @@ if (user && password) {
     url = `amqp://${host}:${port}`.concat(vhost ? `/${vhost}` : '');
 }
 
-const drainer: Drainer = new Drainer(url, queue, logMessage, logMessageCsv);
+const drainer: Drainer = new Drainer(url, queue, logMessage, logMessageCsv, i18n);
 if (numToConsume === 0) {
     drainer.consumeMessages();
 } else {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./built",
+    "outDir": "dist",
     "allowJs": true,
     "target": "es6",
     "module": "commonjs",
@@ -10,7 +10,7 @@
     "strictNullChecks": true
   },
   "include": [
-    "./src/**/*"
+    "src/**/*"
   ],
   "eslint.autoFixOnSave":  true,
   "eslint.validate":  [
