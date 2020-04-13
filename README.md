@@ -1,8 +1,8 @@
-# queue-drainer
+# amq-queue-drainer
 A commandline node.js app to drain AMQP message queues.
 
 ## Install
-`npm install`
+Git clone then `npm install && npm run build`
 
 ## Use
 ```
