@@ -1,6 +1,6 @@
 {
 		"name": "amq-queue-drainer",
-		"version": "1.0.1",
+		"version": "1.1.0-0",
 		"description": "drains a Rabbit AMQ queue",
 		"main": "dist/src/index.js",
 		"dependencies": {
