@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "dist/",
     "allowJs": true,
     "target": "es6",
     "module": "commonjs",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "incremental": true,
+    "declaration": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*", "src/**/*.json"
   ],
   "eslint.autoFixOnSave":  true,
   "eslint.validate":  [

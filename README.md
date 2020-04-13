@@ -1,8 +1,8 @@
-# queue-drainer
-A commandline node.js app to drain AMQP message queues.
+# amq-queue-drainer
+A commandline nodejs app to drain AMQP message queues.  Now one could use the Rabbit management console to purge messages or write your own consumer but if neither of these are an option then this quick cli will do it for you either continually consuming any message to a queue or consuming a set number.  It is written in Typescript so it will need building with npm.
 
 ## Install
-`npm install`
+Git clone then `npm install && npm run build`
 
 ## Use
 ```
