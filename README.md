@@ -43,7 +43,7 @@ message: 1 ✅
 waiting.. \ ^C
 ```
 
-`CTRL-C` to exit.
+<kbd>CTRL-C</kbd> to exit.
 
 Additional options to support virtual hosts, don't log messages and authentication are supported.
 
