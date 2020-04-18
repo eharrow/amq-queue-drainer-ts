@@ -47,3 +47,6 @@ waiting.. \ ^C
 
 Additional options to support virtual hosts, don't log messages and authentication are supported.
 
+## Uninstall
+`npm uninstall -g amq-queue-drainer`
+
