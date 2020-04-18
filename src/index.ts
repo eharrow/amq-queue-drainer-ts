@@ -78,8 +78,7 @@ const drainer: Drainer = new Drainer(
   i18n
 );
 if (numToConsume === 0) {
-  drainer.consumeMessages().catch(err => console.info('oh oh'));
+  drainer.consumeMessages().catch((err) => console.info("oh oh"));
 } else {
-  drainer.consumeNmessages(numToConsume).catch(err => console.info('oh oh'));
+  drainer.consumeNmessages(numToConsume).catch((err) => console.info("oh oh"));
 }
-

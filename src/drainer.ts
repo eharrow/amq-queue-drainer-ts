@@ -3,8 +3,6 @@ import { Spinner } from "cli-spinner";
 import chalk from "chalk";
 import emoji from "node-emoji";
 import { Message } from "amqplib";
-import i18n from "i18n";
-import { promises } from "dns";
 
 /**
  * The queue drainer that connects to an AMQ queue and consumes all the messages.
@@ -38,7 +36,7 @@ export class Drainer {
     this.spinner = new Spinner("waiting.. %s ");
   }
 
-    /**
+  /**
    * connect and consume messages
    */
   public async consumeMessages() {
@@ -65,7 +63,7 @@ export class Drainer {
             console.error("error when consuming a message", error);
           });
       }
-    ).catch(err => console.error('oh oh', err));
+    ).catch((err) => console.error("oh oh", err));
   }
 
   /**
@@ -105,7 +103,7 @@ export class Drainer {
             console.error("error when consuming a message", error);
           });
       }
-    )
+    );
   }
 
   private async setupAndProcess(processFn: Function) {
@@ -152,7 +150,7 @@ export class Drainer {
 
     connection.on("close", (err: Error) => {
       // when the queue does not exist don't bother reconnecting
-      if (!err.message.search('404')) {
+      if (!err.message.search("404")) {
         console.error("[AMQP] conn closed.  Will reconnect...", err.message);
         return setTimeout(this.createConnection.bind(null, url), 1000);
       }
