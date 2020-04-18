@@ -42,8 +42,8 @@ class Drainer {
         this.spinner = new cli_spinner_1.Spinner("waiting.. %s ");
     }
     /**
-   * connect and consume messages
-   */
+     * connect and consume messages
+     */
     consumeMessages() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.setupAndProcess((channel, logMessageCsv, logMessage) => {
@@ -61,7 +61,7 @@ class Drainer {
                     .catch((error) => {
                     console.error("error when consuming a message", error);
                 });
-            }).catch(err => console.error('oh oh', err));
+            }).catch((err) => console.error("oh oh", err));
         });
     }
     /**
@@ -104,7 +104,7 @@ class Drainer {
                 try {
                     const ok = yield channel.checkQueue(this.queue);
                     if (ok) {
-                        console.info(` [*] Waiting for messages in ${chalk_1.default.bold.red(this.queue)}. ${chalk_1.default.inverse.greenBright("CTRL+C")} to exit`);
+                        console.info(` [*] Waiting for messages in ${chalk_1.default.bold.red(this.queue)}. ${chalk_1.default.inverse.greenBright("CTRL-C")} to exit`);
                         this.spinner.start();
                         const logMessage = this.logMessage;
                         const logMessageCsv = this.logMessageCsv;
@@ -131,7 +131,7 @@ class Drainer {
             });
             connection.on("close", (err) => {
                 // when the queue does not exist don't bother reconnecting
-                if (!err.message.search('404')) {
+                if (!err.message.search("404")) {
                     console.error("[AMQP] conn closed.  Will reconnect...", err.message);
                     return setTimeout(this.createConnection.bind(null, url), 1000);
                 }

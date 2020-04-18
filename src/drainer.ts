@@ -118,7 +118,7 @@ export class Drainer {
           console.info(
             ` [*] Waiting for messages in ${chalk.bold.red(
               this.queue
-            )}. ${chalk.inverse.greenBright("CTRL+C")} to exit`
+            )}. ${chalk.inverse.greenBright("CTRL-C")} to exit`
           );
           this.spinner.start();
           const logMessage = this.logMessage;

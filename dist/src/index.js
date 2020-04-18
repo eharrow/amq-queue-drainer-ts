@@ -55,8 +55,8 @@ else {
 }
 const drainer = new drainer_1.Drainer(url, queue, logMessage, logMessageCsv, i18n_1.default);
 if (numToConsume === 0) {
-    drainer.consumeMessages().catch(err => console.info('oh oh'));
+    drainer.consumeMessages().catch((err) => console.info("oh oh"));
 }
 else {
-    drainer.consumeNmessages(numToConsume).catch(err => console.info('oh oh'));
+    drainer.consumeNmessages(numToConsume).catch((err) => console.info("oh oh"));
 }

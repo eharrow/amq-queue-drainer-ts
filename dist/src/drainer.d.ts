@@ -16,8 +16,8 @@ export declare class Drainer {
      */
     constructor(url: string, queue: string, logMessage: boolean, logMessageCsv: boolean, i18n: any);
     /**
-   * connect and consume messages
-   */
+     * connect and consume messages
+     */
     consumeMessages(): Promise<any>;
     /**
      * connect and consume a specific number of messages
