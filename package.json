@@ -3,6 +3,10 @@
 		"version": "1.1.0-0",
 		"description": "drains a Rabbit AMQ queue",
 		"main": "dist/src/index.js",
+		"preferGlobal": true,
+		"directories": {
+				"bin": "./bin"
+		},
 		"dependencies": {
 				"amqplib": "^0.5.5",
 				"chalk": "^4.0.0",
