@@ -342,7 +342,7 @@
         "signature": "f83c57e4fccf8a005e2ce4d7dbcd2e776552be39124d62eb612fc0d38dc83ac2"
       },
       "../src/filler.ts": {
-        "version": "b78e5c8d42814ccbad2e36a922f07a5f18aa04941df8c2a9ab648f5c646baf45",
+        "version": "6eb473a4df80ab7319e1169c9d7f0528ca6e7282fc9286173df527f89cac6159",
         "signature": "336db804461e0be07751317e68f408ca3638a089ba4e58586cffbd67ad9d4ea5"
       },
       "../node_modules/@types/figlet/index.d.ts": {
@@ -1008,7 +1008,6 @@
       ],
       "../src/filler.ts": [
         "../node_modules/@types/amqplib/index.d.ts",
-        "../node_modules/@types/cli-spinner/index.d.ts",
         "../node_modules/chalk/index.d.ts",
         "../node_modules/@types/prompts/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",

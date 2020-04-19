@@ -1,5 +1,4 @@
 import * as amqplib from "amqplib";
-import { Spinner } from "cli-spinner";
 import chalk from "chalk";
 import prompt from "prompts";
 
