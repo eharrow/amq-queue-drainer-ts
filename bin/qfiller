@@ -1,0 +1,3 @@
+#!/usr/bin/env node
+process.env.MODE = 'fill';
+require('../dist/src/index.js');

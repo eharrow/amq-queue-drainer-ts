@@ -2,9 +2,9 @@ import chalk from "chalk";
 import figlet from "figlet";
 import program from "commander";
 import { Drainer } from "./drainer";
+import { Filler } from "./filler";
 import pkg from "../package.json";
 import i18n from "i18n";
-
 i18n.configure({
   directory: __dirname + "/locales",
   objectNotation: true,
@@ -15,14 +15,15 @@ const QUEUE_1 = "queue_1";
 const QUEUE_2 = "queue_2";
 const QUEUE_3 = "queue_3";
 
+const BANNER_QDRAINER = "Q Drainer";
+const BANNER_QFILLER = "Q Filler";
+
 const fonts = figlet.fontsSync();
 const font = fonts[Math.floor(Math.random() * fonts.length)];
-console.log(
-  chalk.yellow(figlet.textSync("Q Drainer", { font, horizontalLayout: "full" }))
-);
 
 program
   .version(pkg.version)
+  .option("-m --mode <mode>", "mode to drain or fill", "drain")
   .option("-h, --host <host>", "rabbit host", "localhost")
   .option("-p, --port <port>", "rabbit port", "5672")
   .option("-v, --vhost <vhost>", "virtual host", "")
@@ -53,6 +54,22 @@ const queue: string = program.queue;
 const logMessage: boolean = program.logMessage;
 const logMessageCsv: boolean = program.logMessageCsv;
 const numToConsume: number = program.numToConsume || 0;
+const mode: string = process.env.MODE || program.mode;
+const isFillerMode = mode === "fill";
+
+if (isFillerMode) {
+  console.log(
+    chalk.green(
+      figlet.textSync(BANNER_QFILLER, { font, horizontalLayout: "full" })
+    )
+  );
+} else {
+  console.log(
+    chalk.yellow(
+      figlet.textSync(BANNER_QDRAINER, { font, horizontalLayout: "full" })
+    )
+  );
+}
 
 if (!(host && port && queue)) {
   console.error(i18n.__("err_missingArgs"));
@@ -70,15 +87,30 @@ if (user && password) {
   url = `amqp://${host}:${port}`.concat(vhost ? `/${vhost}` : "");
 }
 
-const drainer: Drainer = new Drainer(
-  url,
-  queue,
-  logMessage,
-  logMessageCsv,
-  i18n
-);
-if (numToConsume === 0) {
-  drainer.consumeMessages().catch((err) => console.info("oh oh"));
+if (isFillerMode) {
+  const filler: Filler = new Filler(
+    url,
+    queue,
+    logMessage,
+    logMessageCsv,
+    i18n
+  );
+  if (numToConsume === 0) {
+    filler.publishMessage().catch((err) => console.info("oh oh"));
+  }
 } else {
-  drainer.consumeNmessages(numToConsume).catch((err) => console.info("oh oh"));
+  const drainer: Drainer = new Drainer(
+    url,
+    queue,
+    logMessage,
+    logMessageCsv,
+    i18n
+  );
+  if (numToConsume === 0) {
+    drainer.consumeMessages().catch((err) => console.info("oh oh"));
+  } else {
+    drainer
+      .consumeNmessages(numToConsume)
+      .catch((err) => console.info("oh oh"));
+  }
 }
