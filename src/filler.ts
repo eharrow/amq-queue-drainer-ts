@@ -38,11 +38,11 @@ export class Filler {
   public async publishMessage() {
     const channel: amqplib.Channel = await this.setupAndProcess();
     while (true) {
-      await this.doit(channel);
+      await this.publish(channel);
     }
   }
 
-  private async doit(channel: amqplib.Channel) {
+  private async publish(channel: amqplib.Channel) {
     {
       const onCancel = () => {
         process.exit(0);
@@ -58,11 +58,18 @@ export class Filler {
         { onCancel }
       );
 
-      //   console.log(response); // => { value: 24 }
       const buf: Buffer = Buffer.from(response.value, "utf8");
-      Promise.resolve(channel.publish("", "test_q", buf));
+      Promise.resolve(channel.publish(this.exchange(), this.routingKey(), buf));
     }
   }
+  private exchange(): string {
+    return "";
+  }
+
+  private routingKey(): string {
+    return this.queue;
+  }
+
   private async setupAndProcess(): Promise<any> {
     try {
       const connection = await this.createConnection(this.url);

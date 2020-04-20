@@ -46,11 +46,11 @@ class Filler {
         return __awaiter(this, void 0, void 0, function* () {
             const channel = yield this.setupAndProcess();
             while (true) {
-                yield this.doit(channel);
+                yield this.publish(channel);
             }
         });
     }
-    doit(channel) {
+    publish(channel) {
         return __awaiter(this, void 0, void 0, function* () {
             {
                 const onCancel = () => {
@@ -62,11 +62,16 @@ class Filler {
                     message: "Message to publish?",
                     validate: (value) => value.length === 0 ? `You need to enter something` : true,
                 }, { onCancel });
-                //   console.log(response); // => { value: 24 }
                 const buf = Buffer.from(response.value, "utf8");
-                Promise.resolve(channel.publish("", "test_q", buf));
+                Promise.resolve(channel.publish(this.exchange(), this.routingKey(), buf));
             }
         });
+    }
+    exchange() {
+        return "";
+    }
+    routingKey() {
+        return this.queue;
     }
     setupAndProcess() {
         return __awaiter(this, void 0, void 0, function* () {

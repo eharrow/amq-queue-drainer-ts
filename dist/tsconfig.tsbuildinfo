@@ -342,8 +342,8 @@
         "signature": "f83c57e4fccf8a005e2ce4d7dbcd2e776552be39124d62eb612fc0d38dc83ac2"
       },
       "../src/filler.ts": {
-        "version": "6eb473a4df80ab7319e1169c9d7f0528ca6e7282fc9286173df527f89cac6159",
-        "signature": "336db804461e0be07751317e68f408ca3638a089ba4e58586cffbd67ad9d4ea5"
+        "version": "3f56c38dc47bfa72f2bd09ae208a104f6b19c3986b9260e443b23681e6ffebee",
+        "signature": "46ed92f822d83d21340cfb5ca05cddd269edb93bcc0ad376dadac1fb3ad433ae"
       },
       "../node_modules/@types/figlet/index.d.ts": {
         "version": "eb42f656f5b4254dece165b817680ec86c87799d141c44a132c1f81fc3bb37e0",
@@ -1805,12 +1805,12 @@
       "../node_modules/commander/typings/index.d.ts",
       "../package.json",
       "../node_modules/@types/i18n/index.d.ts",
-      "../src/index.ts",
       "../src/locales/en.json",
       "../node_modules/@types/color-name/index.d.ts",
       "../node_modules/@types/eslint-visitor-keys/index.d.ts",
       "../node_modules/@types/json-schema/index.d.ts",
-      "../src/filler.ts"
+      "../src/filler.ts",
+      "../src/index.ts"
     ]
   },
   "version": "3.8.3"

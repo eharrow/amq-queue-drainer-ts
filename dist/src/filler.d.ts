@@ -18,7 +18,9 @@ export declare class Filler {
      * connect and consume messages
      */
     publishMessage(): Promise<void>;
-    private doit;
+    private publish;
+    private exchange;
+    private routingKey;
     private setupAndProcess;
     private createConnection;
 }
