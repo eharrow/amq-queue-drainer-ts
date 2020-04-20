@@ -1,11 +1,24 @@
 {
     "name": "amq-queue-drainer",
     "version": "1.2.0-0",
-    "description": "drains a Rabbit AMQ queue",
+    "description": "CLI to drain or fill a Rabbit AMQ queue.",
+    "keywords": [
+        "rabbit",
+        "rabbitmq",
+        "cli",
+        "amqp",
+        "drainer",
+        "utilities"
+    ],
+    "homepage": "https://github.com/eharrow/amq-queue-drainer/blob/master/README.md",
     "main": "dist/src/index.js",
     "preferGlobal": true,
     "directories": {
         "bin": "./bin"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/eharrow/amq-queue-drainer.git"
     },
     "dependencies": {
         "@types/prompts": "^2.0.5",
@@ -54,6 +67,9 @@
         "hooks": {
             "pre-commit": "lint-staged"
         }
+    },
+    "engines": {
+        "node": ">=8"
     },
     "author": "ewan@harrow.org",
     "license": "ISC"
