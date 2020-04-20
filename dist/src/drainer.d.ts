@@ -24,6 +24,5 @@ export declare class Drainer {
      */
     consumeNmessages(numToConsume: number): Promise<any>;
     private setupAndProcess;
-    private createConnection;
     private log;
 }

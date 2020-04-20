@@ -3,6 +3,7 @@ import { Spinner } from "cli-spinner";
 import chalk from "chalk";
 import emoji from "node-emoji";
 import { Message } from "amqplib";
+import { ConnectionHelper } from "./connectionHelper";
 
 /**
  * The queue drainer that connects to an AMQ queue and consumes all the messages.
@@ -108,7 +109,9 @@ export class Drainer {
 
   private async setupAndProcess(processFn: Function) {
     try {
-      const connection = await this.createConnection(this.url);
+      const connection = await new ConnectionHelper(this.i18n).createConnection(
+        this.url
+      );
       const channel = await connection.createChannel();
 
       try {
@@ -135,28 +138,6 @@ export class Drainer {
         error.message
       );
     }
-  }
-
-  private async createConnection(url: string) {
-    console.log(`${this.i18n.__("connect.msg")} ${chalk.blue(url)}`);
-
-    const connection = await amqplib.connect(url);
-
-    connection.on("error", (err: Error) => {
-      if (err.message !== "Connection closing") {
-        console.error("[AMQP] conn error", err.message);
-      }
-    });
-
-    connection.on("close", (err: Error) => {
-      // when the queue does not exist don't bother reconnecting
-      if (!err.message.search("404")) {
-        console.error("[AMQP] conn closed.  Will reconnect...", err.message);
-        return setTimeout(this.createConnection.bind(null, url), 1000);
-      }
-    });
-
-    return connection;
   }
 
   private log(

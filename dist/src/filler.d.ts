@@ -22,5 +22,4 @@ export declare class Filler {
     private exchange;
     private routingKey;
     private setupAndProcess;
-    private createConnection;
 }

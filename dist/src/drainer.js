@@ -8,21 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const amqplib = __importStar(require("amqplib"));
 const cli_spinner_1 = require("cli-spinner");
 const chalk_1 = __importDefault(require("chalk"));
 const node_emoji_1 = __importDefault(require("node-emoji"));
+const connectionHelper_1 = require("./connectionHelper");
 /**
  * The queue drainer that connects to an AMQ queue and consumes all the messages.
  */
@@ -99,7 +92,7 @@ class Drainer {
     setupAndProcess(processFn) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const connection = yield this.createConnection(this.url);
+                const connection = yield new connectionHelper_1.ConnectionHelper(this.i18n).createConnection(this.url);
                 const channel = yield connection.createChannel();
                 try {
                     const ok = yield channel.checkQueue(this.queue);
@@ -118,25 +111,6 @@ class Drainer {
             catch (error) {
                 console.error(`${this.i18n.__("connect.error.msg.server")}`, error.message);
             }
-        });
-    }
-    createConnection(url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log(`${this.i18n.__("connect.msg")} ${chalk_1.default.blue(url)}`);
-            const connection = yield amqplib.connect(url);
-            connection.on("error", (err) => {
-                if (err.message !== "Connection closing") {
-                    console.error("[AMQP] conn error", err.message);
-                }
-            });
-            connection.on("close", (err) => {
-                // when the queue does not exist don't bother reconnecting
-                if (!err.message.search("404")) {
-                    console.error("[AMQP] conn closed.  Will reconnect...", err.message);
-                    return setTimeout(this.createConnection.bind(null, url), 1000);
-                }
-            });
-            return connection;
         });
     }
     log(count, message, logMessage, logMessageCsv) {
