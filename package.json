@@ -1,6 +1,6 @@
 {
 	"name": "amq-queue-drainer",
-	"version": "1.2.0-0",
+	"version": "1.2.0",
 	"description": "CLI to drain or fill a Rabbit AMQ queue.",
 	"keywords": [
 		"rabbit",
