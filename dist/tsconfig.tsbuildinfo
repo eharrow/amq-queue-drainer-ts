@@ -1817,7 +1817,9 @@
       "../src/connectionhelper.ts",
       "../node_modules/@types/cli-spinner/index.d.ts",
       "../node_modules/@types/node-emoji/index.d.ts",
+      "../src/drainer.ts",
       "../node_modules/@types/prompts/index.d.ts",
+      "../src/filler.ts",
       "../node_modules/@types/figlet/index.d.ts",
       "../node_modules/commander/typings/index.d.ts",
       "../package.json",
@@ -1826,9 +1828,7 @@
       "../node_modules/@types/color-name/index.d.ts",
       "../node_modules/@types/eslint-visitor-keys/index.d.ts",
       "../node_modules/@types/json-schema/index.d.ts",
-      "../src/drainer.ts",
-      "../src/index.ts",
-      "../src/filler.ts"
+      "../src/index.ts"
     ]
   },
   "version": "3.8.3"
