@@ -37,7 +37,7 @@
 		"@types/cli-spinner": "^0.2.0",
 		"@types/figlet": "^1.2.0",
 		"@types/i18n": "^0.8.6",
-		"@types/node": "^13.13.0",
+		"@types/node": "^20.2.5",
 		"@types/node-emoji": "^1.8.1",
 		"@typescript-eslint/eslint-plugin": "^2.28.0",
 		"@typescript-eslint/parser": "^2.28.0",
