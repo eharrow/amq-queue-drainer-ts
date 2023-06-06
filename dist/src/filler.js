@@ -50,7 +50,7 @@ class Filler {
                 const onCancel = () => {
                     process.exit(0);
                 };
-                const response = yield prompts_1.default({
+                const response = yield (0, prompts_1.default)({
                     type: "text",
                     name: "value",
                     message: "Message to publish?",
