@@ -2,7 +2,7 @@ import * as amqplib from "amqplib";
 import { Spinner } from "cli-spinner";
 import chalk from "chalk";
 import emoji from "node-emoji";
-import { Message } from "amqplib";
+import { Message, ConsumeMessage } from "amqplib";
 import { ConnectionHelper } from "./connectionHelper";
 
 /**
@@ -50,7 +50,7 @@ export class Drainer {
         let count = 0;
 
         return channel
-          .consume(this.queue, (message: Message) => {
+          .consume(this.queue, (message: ConsumeMessage) => {
             this.spinner.stop(true);
 
             if (message != null) {
