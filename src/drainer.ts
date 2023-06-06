@@ -1,8 +1,8 @@
 import * as amqplib from "amqplib";
-import { Spinner } from "cli-spinner";
+import { ConsumeMessage, Message } from "amqplib";
 import chalk from "chalk";
+import { Spinner } from "cli-spinner";
 import emoji from "node-emoji";
-import { Message, ConsumeMessage } from "amqplib";
 import { ConnectionHelper } from "./connectionHelper";
 
 /**
