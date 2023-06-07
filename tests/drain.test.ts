@@ -21,23 +21,23 @@ describe('basic test', () => {
 
   afterAll(async () => {
     await startedContainer.stop();
-  });
+  }, 60000);
 
   test('it consumes a message from the queue', async () => {
-    const host: string = startedContainer.getHost();
-    const port = startedContainer.getFirstMappedPort();
-    // console.log(`host ${host}, port ${port}`);
+      const host: string = startedContainer.getHost();
+      const port = startedContainer.getFirstMappedPort();
+      // console.log(`host ${host}, port ${port}`);
     const url = `amqp://${host}:${port}`;
-    const connection = await amqplib.connect(url);
+      const connection = await amqplib.connect(url);
     const ch = await connection.createChannel();
     const q = 'hello';
-    const msg = 'Hello World!';
-
-    ch.assertQueue(q, { durable: false });
-    for (let index = 0; index < 100; index++) {
-      ch.sendToQueue(q, Buffer.from(msg));
-      // console.log(` [${index}] Sent %s`, msg);
-    }
+      const msg = 'Hello World!';
+  
+      ch.assertQueue(q, { durable: false });
+      for (let index = 0; index < 100; index++) {
+        ch.sendToQueue(q, Buffer.from(msg));
+        // console.log(` [${index}] Sent %s`, msg);
+      }
 
     const drainer: Drainer = new Drainer(
       url,
