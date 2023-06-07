@@ -17,7 +17,7 @@ describe('basic test', () => {
 
   beforeAll(async () => {
     startedContainer = await container.withExposedPorts(5672).start();
-  }, 10000);
+  }, 60000);
 
   afterAll(async () => {
     await startedContainer.stop();
