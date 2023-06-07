@@ -24,10 +24,10 @@ describe('basic test', () => {
     stoppedContainer = await startedContainer.stop();
   });
 
-  test('adds 1 + 2 to equal 3', async () => {
+  test('it consumes a message from the queue', async () => {
     const host: string = startedContainer.getHost();
     const port = startedContainer.getFirstMappedPort();
-    console.log(`host ${host}, port ${port}`);
+    // console.log(`host ${host}, port ${port}`);
     const url = `amqp://${host}:${port}`;
     const connection = await amqplib.connect(url);
     const ch = await connection.createChannel();
@@ -35,8 +35,10 @@ describe('basic test', () => {
     const msg = 'Hello World!';
 
     ch.assertQueue(q, { durable: false });
-    ch.sendToQueue(q, Buffer.from(msg));
-    console.log(' [x] Sent %s', msg);
+    for (let index = 0; index < 100; index++) {
+      ch.sendToQueue(q, Buffer.from(msg));
+      console.log(` [${index}] Sent %s`, msg);
+    }
 
     const drainer: Drainer = new Drainer(
       url,
@@ -46,10 +48,13 @@ describe('basic test', () => {
       i18n
     );
 
-    drainer
-      .consumeMessages()
+    await drainer
+      .consumeNmessages(1)
       .catch((err) => console.info("oh oh"));
 
-    expect(1 + 2).toBe(3);
+    
+    const msgCount = (await ch.purgeQueue(q)).messageCount;
+    console.log(`purging queue of ${msgCount} messages`);
+    expect(msgCount === 3);
   }, 5000);
 });
