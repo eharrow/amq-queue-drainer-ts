@@ -14,14 +14,13 @@ jest.mock('i18n');
 describe('basic test', () => {
   const container: TestContainer = new GenericContainer("rabbitmq:3-management");
   let startedContainer: StartedTestContainer;
-  let stoppedContainer: StoppedTestContainer;
 
   beforeAll(async () => {
     startedContainer = await container.withExposedPorts(5672).start();
   }, 10000);
 
   afterAll(async () => {
-    stoppedContainer = await startedContainer.stop();
+    await startedContainer.stop();
   });
 
   test('it consumes a message from the queue', async () => {
@@ -37,7 +36,7 @@ describe('basic test', () => {
     ch.assertQueue(q, { durable: false });
     for (let index = 0; index < 100; index++) {
       ch.sendToQueue(q, Buffer.from(msg));
-      console.log(` [${index}] Sent %s`, msg);
+      // console.log(` [${index}] Sent %s`, msg);
     }
 
     const drainer: Drainer = new Drainer(
@@ -48,13 +47,10 @@ describe('basic test', () => {
       i18n
     );
 
-    await drainer
-      .consumeNmessages(1)
-      .catch((err) => console.info("oh oh"));
+    await drainer.consumeNmessages(1);
 
-    
     const msgCount = (await ch.purgeQueue(q)).messageCount;
-    console.log(`purging queue of ${msgCount} messages`);
-    expect(msgCount === 3);
+    // console.log(`purging queue of ${msgCount} messages`);
+    expect(msgCount).toBe(99);
   }, 5000);
 });
