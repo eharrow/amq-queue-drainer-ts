@@ -97,7 +97,7 @@ export class Drainer {
             });
 
             channel.close().then(() => {
-              return process.exit(0);
+              return true;
             });
           })
           .catch((error: any) => {
