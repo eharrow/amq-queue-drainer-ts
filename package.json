@@ -58,7 +58,7 @@
 	"scripts": {
 		"lint": "eslint src/* --fix",
 		"format": "prettier --write \"src/*.ts\"",
-		"test": "jest",
+		"test": "jest --passWithNoTests",
 		"intTest": "echo \"Error: no test specified\" && exit 1",
 		"build": "tsc"
 	},
