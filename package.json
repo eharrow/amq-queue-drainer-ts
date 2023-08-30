@@ -49,8 +49,12 @@
 =======
 		"@types/node": "^20.5.1",
     	"@typescript-eslint/eslint-plugin": "^6.5.0",
+<<<<<<< HEAD
 >>>>>>> ae59a84 (chore(deps-dev): bump @typescript-eslint/eslint-plugin)
     	"@typescript-eslint/parser": "^6.4.1",
+=======
+    	"@typescript-eslint/parser": "^6.5.0",
+>>>>>>> e60d2d3 (chore(deps-dev): bump @typescript-eslint/parser from 6.4.1 to 6.5.0)
 		"eslint": "^8.48.0",
 		"eslint-config-google": "^0.14.0",
 		"eslint-config-prettier": "^9.0.0",
