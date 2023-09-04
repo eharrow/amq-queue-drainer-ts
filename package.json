@@ -37,24 +37,10 @@
 		"@types/cli-spinner": "^0.2.0",
 		"@types/figlet": "^1.2.0",
 		"@types/i18n": "^0.13.6",
-<<<<<<< HEAD
-		"@types/jest": "^29.5.3",
-<<<<<<< HEAD
-		"@types/node": "^20.5.7",
-=======
 		"@types/jest": "^29.5.4",
-		"@types/node": "^20.5.1",
->>>>>>> c4ca1da (chore(deps-dev): bump jest and @types/jest)
-    	"@typescript-eslint/eslint-plugin": "^6.4.1",
-=======
-		"@types/node": "^20.5.1",
-    	"@typescript-eslint/eslint-plugin": "^6.5.0",
-<<<<<<< HEAD
->>>>>>> ae59a84 (chore(deps-dev): bump @typescript-eslint/eslint-plugin)
-    	"@typescript-eslint/parser": "^6.4.1",
-=======
+		"@types/node": "^20.5.7",
+    	"@typescript-eslint/eslint-plugin": "^6.6.0",
     	"@typescript-eslint/parser": "^6.5.0",
->>>>>>> e60d2d3 (chore(deps-dev): bump @typescript-eslint/parser from 6.4.1 to 6.5.0)
 		"eslint": "^8.48.0",
 		"eslint-config-google": "^0.14.0",
 		"eslint-config-prettier": "^9.0.0",
