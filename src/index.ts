@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import figlet from "figlet";
-import program from "commander";
+import { Command } from 'commander';
 import { Drainer } from "./drainer";
 import { Filler } from "./filler";
 import pkg from "../package.json";
@@ -20,6 +20,8 @@ const BANNER_QFILLER = "Q Filler";
 
 const fonts = figlet.fontsSync();
 const font = fonts[Math.floor(Math.random() * fonts.length)];
+
+const program = new Command();
 
 program
   .version(pkg.version)
@@ -45,16 +47,18 @@ program
   )
   .parse(process.argv);
 
-const host: string = program.host;
-const port: string = program.port;
-const user: string = program.user;
-const password: string = program.password;
-const vhost: string = program.vhost;
-const queue: string = program.queue;
-const logMessage: boolean = program.logMessage;
-const logMessageCsv: boolean = program.logMessageCsv;
-const numToConsume: number = program.numToConsume || 0;
-const mode: string = process.env.MODE || program.mode;
+const options = program.opts();
+
+const host: string = options.host;
+const port: string = options.port;
+const user: string = options.user;
+const password: string = options.password;
+const vhost: string = options.vhost;
+const queue: string = options.queue;
+const logMessage: boolean = options.logMessage;
+const logMessageCsv: boolean = options.logMessageCsv;
+const numToConsume: number = options.numToConsume || 0;
+const mode: string = process.env.MODE || options.mode;
 const isFillerMode = mode === "fill";
 
 if (isFillerMode) {
