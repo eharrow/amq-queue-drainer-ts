@@ -14,7 +14,6 @@ export class Filler {
   private i18n: any;
 
   /**
-   *
    * @param {string} url
    * @param {string} queue
    * @param {boolean} logMessage
@@ -24,7 +23,7 @@ export class Filler {
     queue: string,
     logMessage: boolean,
     logMessageCsv: boolean,
-    i18n: any
+    i18n: any,
   ) {
     this.url = url;
     this.queue = queue;
@@ -53,10 +52,9 @@ export class Filler {
           type: "text",
           name: "value",
           message: "Message to publish?",
-          validate: (value) =>
-            value.length === 0 ? `You need to enter something` : true,
+          validate: (value) => value.length === 0 ? `You need to enter something` : true,
         },
-        { onCancel }
+        { onCancel },
       );
 
       const buf: Buffer = Buffer.from(response.value, "utf8");
@@ -74,7 +72,7 @@ export class Filler {
   private async setupAndProcess(): Promise<any> {
     try {
       const connection = await new ConnectionHelper(this.i18n).createConnection(
-        this.url
+        this.url,
       );
       const channel = await connection.createChannel();
 
@@ -83,9 +81,11 @@ export class Filler {
 
         if (ok) {
           console.info(
-            ` [*] Waiting for messages to send to ${chalk.bold.red(
-              this.queue
-            )}. ${chalk.inverse.greenBright("CTRL-C")} to exit`
+            ` [*] Waiting for messages to send to ${
+              chalk.bold.red(
+                this.queue,
+              )
+            }. ${chalk.inverse.greenBright("CTRL-C")} to exit`,
           );
           return Promise.resolve(channel);
         } else {
@@ -98,7 +98,7 @@ export class Filler {
     } catch (error) {
       console.error(
         `${this.i18n.__("connect.error.msg.server")}`,
-        error.message
+        error.message,
       );
       return Promise.reject("no channel");
     }

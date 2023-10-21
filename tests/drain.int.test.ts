@@ -1,27 +1,21 @@
-import {
-  TestContainer,
-  StartedTestContainer,
-  StoppedTestContainer,
-  GenericContainer
-} from "testcontainers";
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from "@jest/globals";
 import * as amqplib from "amqplib";
+import { GenericContainer, StartedTestContainer, StoppedTestContainer, TestContainer } from "testcontainers";
 import { Drainer } from "../src/drainer";
 import { Filler } from "../src/filler";
 
 import i18n from "i18n";
 
-jest.mock('i18n');
+jest.mock("i18n");
 
-describe('basic test', () => {
+describe("basic test", () => {
   const container: TestContainer = new GenericContainer("rabbitmq:3-management");
   let startedContainer: StartedTestContainer;
   let host: string;
   let port: number;
   let url: string;
   let ch: amqplib.Channel;
-  const q = 'hello';
-
+  const q = "hello";
 
   beforeAll(async () => {
     startedContainer = await container.withExposedPorts(5672).start();
@@ -37,8 +31,8 @@ describe('basic test', () => {
     await startedContainer.stop();
   }, 60000);
 
-  test('it consumes a message from the queue', async () => {
-    const msg = 'Hello World!';
+  test("it consumes a message from the queue", async () => {
+    const msg = "Hello World!";
 
     for (let index = 0; index < 100; index++) {
       ch.sendToQueue(q, Buffer.from(msg));
@@ -50,7 +44,7 @@ describe('basic test', () => {
       q,
       true,
       false,
-      i18n
+      i18n,
     );
 
     await drainer.consumeNmessages(1);
@@ -60,8 +54,8 @@ describe('basic test', () => {
     expect(msgCount).toBe(99);
   }, 5000);
 
-  test('it publishes a message to the queue', async () => {
-    const msg = 'Hello World!';
+  test("it publishes a message to the queue", async () => {
+    const msg = "Hello World!";
 
     for (let index = 0; index < 100; index++) {
       ch.sendToQueue(q, Buffer.from(msg));
@@ -72,7 +66,8 @@ describe('basic test', () => {
       q,
       true,
       false,
-      i18n
+      i18n,
     );
-  await filler.publishMessage(msg);
+    await filler.publishMessage(msg);
+  });
 });

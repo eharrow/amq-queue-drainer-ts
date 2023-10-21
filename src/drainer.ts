@@ -17,7 +17,6 @@ export class Drainer {
   private spinner: Spinner;
 
   /**
-   *
    * @param {string} url
    * @param {string} queue
    * @param {boolean} logMessage
@@ -27,7 +26,7 @@ export class Drainer {
     queue: string,
     logMessage: boolean,
     logMessageCsv: boolean,
-    i18n: any
+    i18n: any,
   ) {
     this.url = url;
     this.queue = queue;
@@ -45,7 +44,7 @@ export class Drainer {
       (
         channel: amqplib.Channel,
         logMessageCsv: boolean,
-        logMessage: boolean
+        logMessage: boolean,
       ) => {
         let count = 0;
 
@@ -63,7 +62,7 @@ export class Drainer {
           .catch((error: any) => {
             console.error("error when consuming a message", error);
           });
-      }
+      },
     ).catch((err) => console.error("oh oh", err));
   }
 
@@ -75,7 +74,7 @@ export class Drainer {
       (
         channel: amqplib.Channel,
         logMessageCsv: boolean,
-        logMessage: boolean
+        logMessage: boolean,
       ) => {
         let count = 0;
         const consumers = [];
@@ -91,7 +90,7 @@ export class Drainer {
               if (message) {
                 count++;
                 this.log(count, message, logMessage, logMessageCsv);
-                //spinner.start();
+                // spinner.start();
                 return channel.ack(message);
               }
             });
@@ -103,14 +102,14 @@ export class Drainer {
           .catch((error: any) => {
             console.error("error when consuming a message", error);
           });
-      }
+      },
     );
   }
 
   private async setupAndProcess(processFn: Function) {
     try {
       const connection = await new ConnectionHelper(this.i18n).createConnection(
-        this.url
+        this.url,
       );
       const channel = await connection.createChannel();
 
@@ -119,9 +118,11 @@ export class Drainer {
 
         if (ok) {
           console.info(
-            ` [*] Waiting for messages in ${chalk.bold.red(
-              this.queue
-            )}. ${chalk.inverse.greenBright("CTRL-C")} to exit`
+            ` [*] Waiting for messages in ${
+              chalk.bold.red(
+                this.queue,
+              )
+            }. ${chalk.inverse.greenBright("CTRL-C")} to exit`,
           );
           this.spinner.start();
           const logMessage = this.logMessage;
@@ -135,7 +136,7 @@ export class Drainer {
     } catch (error) {
       console.error(
         `${this.i18n.__("connect.error.msg.server")}`,
-        error.message
+        error.message,
       );
     }
   }
@@ -144,13 +145,13 @@ export class Drainer {
     count: number,
     message: Message,
     logMessage: boolean,
-    logMessageCsv: boolean
+    logMessageCsv: boolean,
   ) {
     if (logMessageCsv) {
       // add header when first entry
       if (count === 1) {
         console.debug(
-          "----8<---------8<---------8<--------8<---------8<--------8<----------"
+          "----8<---------8<---------8<--------8<---------8<--------8<----------",
         );
         console.debug(`${this.i18n.__("log.csv.header")}`);
       }

@@ -1,17 +1,17 @@
 {
-	"err_missingArgs": "one or more missing arguments",
-	"connect": {
-		"msg": "connecting to...",
-		"error": {
-			"msg": {
-                "server": "Error connecting to server.",
-                "queue": "Error connecting to queue."
-			}
-		}
-    },
-    "log": {
-        "csv": {
-            "header": "\"Message #\",\"Message Body\""
-        }
+  "err_missingArgs": "one or more missing arguments",
+  "connect": {
+    "msg": "connecting to...",
+    "error": {
+      "msg": {
+        "server": "Error connecting to server.",
+        "queue": "Error connecting to queue."
+      }
     }
+  },
+  "log": {
+    "csv": {
+      "header": "\"Message #\",\"Message Body\""
+    }
+  }
 }

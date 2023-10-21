@@ -1,5 +1,5 @@
-import chalk from "chalk";
 import * as amqplib from "amqplib";
+import chalk from "chalk";
 
 export class ConnectionHelper {
   private i18n: any;

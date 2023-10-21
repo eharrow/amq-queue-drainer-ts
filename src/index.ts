@@ -1,10 +1,10 @@
 import chalk from "chalk";
+import { Command } from "commander";
 import figlet from "figlet";
-import { Command } from 'commander';
+import i18n from "i18n";
+import pkg from "../package.json";
 import { Drainer } from "./drainer";
 import { Filler } from "./filler";
-import pkg from "../package.json";
-import i18n from "i18n";
 i18n.configure({
   directory: __dirname + "/locales",
   objectNotation: true,
@@ -34,16 +34,16 @@ program
   .option(
     "-q, --queue <queue>",
     `queue name e.g. ${QUEUE_1}, ${QUEUE_2} or ${QUEUE_3}`,
-    "test_q"
+    "test_q",
   )
   .option(
     "-l, --log-message",
-    "log the dequeued message.  This will be ignored if used with --log-message-csv"
+    "log the dequeued message.  This will be ignored if used with --log-message-csv",
   )
   .option("--log-message-csv", "log the dequeued message as CSV")
   .option(
     "-n, --num-to-consume [num>",
-    "The number of messages to consume and if absent consume all"
+    "The number of messages to consume and if absent consume all",
   )
   .parse(process.argv);
 
@@ -64,14 +64,14 @@ const isFillerMode = mode === "fill";
 if (isFillerMode) {
   console.log(
     chalk.green(
-      figlet.textSync(BANNER_QFILLER, { font, horizontalLayout: "full" })
-    )
+      figlet.textSync(BANNER_QFILLER, { font, horizontalLayout: "full" }),
+    ),
   );
 } else {
   console.log(
     chalk.yellow(
-      figlet.textSync(BANNER_QDRAINER, { font, horizontalLayout: "full" })
-    )
+      figlet.textSync(BANNER_QDRAINER, { font, horizontalLayout: "full" }),
+    ),
   );
 }
 
@@ -85,7 +85,7 @@ let url;
 
 if (user && password) {
   url = `amqp://${user}:${password}@${host}:${port}`.concat(
-    vhost ? `/${vhost}` : ""
+    vhost ? `/${vhost}` : "",
   );
 } else {
   url = `amqp://${host}:${port}`.concat(vhost ? `/${vhost}` : "");
@@ -97,7 +97,7 @@ if (isFillerMode) {
     queue,
     logMessage,
     logMessageCsv,
-    i18n
+    i18n,
   );
   if (numToConsume === 0) {
     filler.publishMessage().catch((err) => console.info("oh oh"));
@@ -108,7 +108,7 @@ if (isFillerMode) {
     queue,
     logMessage,
     logMessageCsv,
-    i18n
+    i18n,
   );
   if (numToConsume === 0) {
     drainer.consumeMessages().catch((err) => console.info("oh oh"));

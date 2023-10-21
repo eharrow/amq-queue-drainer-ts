@@ -9,14 +9,15 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "incremental": true,
-    "declaration": true
+    "declaration": true,
   },
   "include": [
-    "src/**/*", "src/**/*.json"
+    "src/**/*",
+    "src/**/*.json",
   ],
-  "eslint.autoFixOnSave":  true,
-  "eslint.validate":  [
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
     "javascript",
-    {"language":  "typescript",  "autoFix":  true  },
-  ]
+    { "language": "typescript", "autoFix": true },
+  ],
 }
