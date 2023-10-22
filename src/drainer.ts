@@ -2,7 +2,8 @@ import * as amqplib from "amqplib";
 import { ConsumeMessage, Message } from "amqplib";
 import chalk from "chalk";
 import { Spinner } from "cli-spinner";
-import emoji from "node-emoji";
+import { I18n } from "i18n";
+import * as emoji from 'node-emoji';
 import { ConnectionHelper } from "./connectionHelper";
 
 /**
@@ -13,20 +14,22 @@ export class Drainer {
   private queue: string;
   private logMessage: boolean;
   private logMessageCsv: boolean;
-  private i18n: any;
+  private i18n: I18n;
   private spinner: Spinner;
 
   /**
    * @param {string} url
    * @param {string} queue
    * @param {boolean} logMessage
+   * @param logMessageCsv
+   * @param i18n
    */
   public constructor(
     url: string,
     queue: string,
     logMessage: boolean,
     logMessageCsv: boolean,
-    i18n: any,
+    i18n: I18n,
   ) {
     this.url = url;
     this.queue = queue;

@@ -1,10 +1,11 @@
 import * as amqplib from "amqplib";
 import chalk from "chalk";
+import {I18n} from "i18n";
 
 export class ConnectionHelper {
-  private i18n: any;
+  private i18n: I18n;
 
-  constructor(i18n: any) {
+  constructor(i18n: I18n) {
     this.i18n = i18n;
   }
   public async createConnection(url: string) {

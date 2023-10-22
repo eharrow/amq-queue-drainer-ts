@@ -29,7 +29,7 @@ describe("basic test", () => {
 
   afterAll(async () => {
     await startedContainer.stop();
-  }, 60000);
+  }, 10000);
 
   test("it consumes a message from the queue", async () => {
     const msg = "Hello World!";
@@ -68,6 +68,6 @@ describe("basic test", () => {
       false,
       i18n,
     );
-    await filler.publishMessage(msg);
+    await filler.publishMessage();
   });
 });
