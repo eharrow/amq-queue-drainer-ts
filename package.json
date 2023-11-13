@@ -35,7 +35,7 @@
 	"devDependencies": {
 		"@types/amqplib": "^0.10.3",
 		"@types/cli-spinner": "^0.2.2",
-		"@types/figlet": "^1.5.7",
+		"@types/figlet": "^1.5.8",
 		"@types/i18n": "^0.13.8",
 		"@types/jest": "^29.5.7",
 		"@types/node": "^20.8.10",
