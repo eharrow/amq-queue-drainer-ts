@@ -21,7 +21,7 @@
 		"url": "https://github.com/eharrow/amq-queue-drainer-ts.git"
 	},
 	"dependencies": {
-		"@types/prompts": "^2.4.7",
+		"@types/prompts": "^2.4.8",
 		"amqplib": "^0.10.3",
 		"chalk": "^4.1.2",
 		"cli-spinner": "^0.2.10",
