@@ -38,7 +38,7 @@
 		"@types/figlet": "^1.7.0",
 		"@types/i18n": "^0.13.12",
 		"@types/jest": "^29.5.14",
-		"@types/node": "^22.13.8",
+		"@types/node": "^22.13.9",
 		"@typescript-eslint/eslint-plugin": "^8.26.0",
 		"@typescript-eslint/parser": "^8.26.0",
 		"eslint": "^9.21.0",
