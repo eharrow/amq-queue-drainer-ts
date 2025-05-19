@@ -46,7 +46,7 @@
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-prettier": "^5.4.0",
 		"jest": "^29.7.0",
-		"jest-extended": "^4.0.2",
+		"jest-extended": "^5.0.1",
 		"prettier": "^3.5.3",
 		"rabbitmq-eventemitter-mock": "^1.2.0",
 		"supertest": "^7.1.1",
