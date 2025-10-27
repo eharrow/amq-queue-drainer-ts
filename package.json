@@ -33,7 +33,7 @@
 		"source-map-support": "^0.5.16"
 	},
 	"devDependencies": {
-		"@types/amqplib": "^0.10.7",
+		"@types/amqplib": "^0.10.8",
 		"@types/cli-spinner": "^0.2.3",
 		"@types/figlet": "^1.7.0",
 		"@types/i18n": "^0.13.12",
