@@ -50,7 +50,7 @@
 		"prettier": "^3.7.4",
 		"rabbitmq-eventemitter-mock": "^1.2.0",
 		"supertest": "^7.1.4",
-		"testcontainers": "^11.9.0",
+		"testcontainers": "^11.10.0",
 		"ts-jest": "^29.4.6",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.9.3"
