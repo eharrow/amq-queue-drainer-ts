@@ -53,7 +53,7 @@
 		"testcontainers": "^11.13.0",
 		"ts-jest": "^29.4.9",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.9.3"
+		"typescript": "^6.0.2"
 	},
 	"scripts": {
 		"lint": "eslint src/* --fix",
